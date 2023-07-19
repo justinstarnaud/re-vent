@@ -1,0 +1,184 @@
+<app-nav-bar></app-nav-bar>
+<div class="main-content">
+  <div
+    class="retour"
+    routerLink="/products"
+    *ngIf="item.preview.category"
+    [queryParams]="{ category: item.preview.category }"
+  >
+    <svg
+      width="35"
+      height="43"
+      viewBox="0 0 35 43"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M17 1C15.8377 11.5926 12.1997 15.4996 1 19V24.5C15.2603 27.8265 14.9113 33.3442 17 42L23.5 40.5C20.8107 29.9764 17.7952 28.0911 12.5 24.5H34V19H12.5C19.8059 13.5824 22.3161 10.005 23.5 2.5L17 1Z"
+        fill="#282828"
+        stroke="#282828"
+      />
+    </svg>
+    <p>{{ item.preview.category }}</p>
+  </div>
+  <app-skeleton
+    type="title"
+    width="150px"
+    height="40px"
+    *ngIf="!item.preview.category"
+  ></app-skeleton>
+  <div class="product-info">
+    <div class="left-info">
+      <div class="product-title" *ngIf="item.preview.title">
+        <h2>{{ item.preview.title }}</h2>
+        <span class="price">${{ item.preview.price }}</span>
+      </div>
+      <app-skeleton
+        type="title"
+        class="product-title"
+        height="45px"
+        *ngIf="!item.preview.title"
+      ></app-skeleton>
+
+      <div class="product-img">
+        <div class="other-img">
+          <img
+            [src]="item.preview.image"
+            alt=""
+            (click)="selectImg(item.preview.image)"
+            [ngClass]="{ selected: this.selectedImg === item.preview.image }"
+            *ngIf="item.preview.image"
+          />
+
+          <app-skeleton
+            type="image"
+            width="75px"
+            height="75px"
+            *ngIf="!item.preview.image"
+          ></app-skeleton>
+
+          <img
+            *ngFor="let i of item.otherImages"
+            [src]="i"
+            alt=""
+            (click)="selectImg(i)"
+            [ngClass]="{ selected: this.selectedImg === i }"
+          />
+        </div>
+        <img
+          *ngIf="item.preview.image"
+          [src]="this.selectedImg"
+          alt=""
+          class="left-img"
+        />
+        <app-skeleton
+          type="image"
+          [transparent]="true"
+          *ngIf="!item.preview.image"
+        ></app-skeleton>
+      </div>
+    </div>
+    <div class="right-info">
+      <div class="state" *ngIf="item.condition">
+        <h3>État</h3>
+        <span>{{ item.condition }}</span>
+      </div>
+      <div class="desc" *ngIf="item.description">
+        <h3>Description</h3>
+        <p>{{ item.description }}</p>
+      </div>
+
+      <app-skeleton
+        type="title"
+        width="300px"
+        height="25px"
+        *ngIf="!item.condition"
+      ></app-skeleton>
+
+      <app-skeleton
+        type="title"
+        width="400px"
+        height="25px"
+        *ngIf="!item.condition"
+      ></app-skeleton>
+      <app-skeleton
+        type="title"
+        width="320px"
+        height="25px"
+        *ngIf="!item.condition"
+      ></app-skeleton>
+      <app-skeleton
+        type="title"
+        width="350px"
+        height="25px"
+        *ngIf="!item.condition"
+      ></app-skeleton>
+      <app-skeleton
+        type="title"
+        width="310px"
+        height="25px"
+        *ngIf="!item.condition"
+      ></app-skeleton>
+      <app-skeleton
+        type="title"
+        width="350px"
+        height="25px"
+        *ngIf="!item.condition"
+      ></app-skeleton>
+
+      <div class="seller">
+        <div class="seller-info">
+          <img
+            *ngIf="seller.picture"
+            [src]="seller.picture"
+            alt=""
+            class="profile-pic"
+          />
+          <app-skeleton
+            type="avatar"
+            width="60px"
+            height="60px"
+            *ngIf="!seller.picture"
+          ></app-skeleton>
+
+          <div class="seller-text" *ngIf="seller.picture">
+            <p class="seller-name">
+              {{ seller.name }}
+              <svg
+                *ngIf="seller.verified"
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12.3503 2.44992C12.7633 2.03747 13.3159 1.79478 13.899 1.76973C14.4821 1.74468 15.0535 1.93908 15.5003 2.31459L15.6496 2.45109L17.8663 4.66659H21C21.5884 4.6667 22.1551 4.88915 22.5865 5.2894C23.0179 5.68964 23.2822 6.23811 23.3263 6.82492L23.3333 6.99992V10.1336L25.55 12.3503C25.9627 12.7633 26.2056 13.3161 26.2307 13.8995C26.2557 14.4829 26.0611 15.0545 25.6853 15.5014L25.5488 15.6496L23.3321 17.8663V20.9999C23.3323 21.5886 23.11 22.1556 22.7097 22.5872C22.3094 23.0189 21.7608 23.2833 21.1738 23.3274L21 23.3333H17.8675L15.6508 25.5499C15.2378 25.9627 14.6849 26.2056 14.1015 26.2306C13.5181 26.2557 12.9465 26.0611 12.4996 25.6853L12.3515 25.5499L10.1348 23.3333H6.99997C6.41129 23.3334 5.8443 23.1111 5.41266 22.7108C4.98101 22.3106 4.71662 21.7619 4.67247 21.1749L4.66663 20.9999V17.8663L2.44997 15.6496C2.03719 15.2365 1.7943 14.6837 1.76924 14.1003C1.74418 13.5169 1.93879 12.9453 2.31463 12.4984L2.44997 12.3503L4.66663 10.1336V6.99992C4.66674 6.41145 4.8892 5.84475 5.28944 5.41335C5.68968 4.98196 6.23815 4.71772 6.82497 4.67359L6.99997 4.66659H10.1336L12.3503 2.44992ZM17.5921 10.4801L12.6408 15.4314L10.5781 13.3688C10.3592 13.15 10.0624 13.0272 9.75289 13.0273C9.4434 13.0274 9.14664 13.1504 8.92788 13.3693C8.70912 13.5883 8.58629 13.8851 8.5864 14.1946C8.5865 14.5041 8.70955 14.8008 8.92846 15.0196L11.7331 17.8243C11.8523 17.9435 11.9938 18.0381 12.1495 18.1026C12.3053 18.1671 12.4722 18.2003 12.6408 18.2003C12.8094 18.2003 12.9763 18.1671 13.132 18.1026C13.2878 18.0381 13.4293 17.9435 13.5485 17.8243L19.2418 12.1298C19.4543 11.9097 19.5719 11.615 19.5693 11.3091C19.5666 11.0032 19.4439 10.7106 19.2276 10.4943C19.0113 10.278 18.7187 10.1553 18.4128 10.1526C18.1069 10.15 17.8122 10.2676 17.5921 10.4801Z"
+                  fill="var(--color-accent-solid)"
+                />
+              </svg>
+            </p>
+            <p class="seller-stat">{{ seller.sold }} articles vendus</p>
+          </div>
+          <app-skeleton
+            type="title"
+            width="175px"
+            height="50px"
+            *ngIf="!seller.picture"
+          ></app-skeleton>
+        </div>
+        <button *ngIf="seller.picture" class="button">Contacter</button>
+        <app-skeleton
+          type="button"
+          width="75px"
+          height="50px"
+          *ngIf="!seller.picture"
+        ></app-skeleton>
+      </div>
+      <div class="location"></div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

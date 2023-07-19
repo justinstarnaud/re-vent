@@ -1,0 +1,45 @@
+<nav class="navbar" [ngClass]="{ floating: true }">
+  <div class="logo-wrapper" routerLink="/home">
+    <img
+      class="logo"
+      src="assets/logos/PNG/Revent_Logo_Noir_RGB.png"
+      alt="logo"
+    />
+  </div>
+  <ul class="navlist">
+    <li class="navitem">
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Vêtements' }"
+        [ngClass]="{ active: this.active === 'vetements' }"
+        >Vêtements</a
+      >
+    </li>
+    <li class="navitem">
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Tentes' }"
+        [ngClass]="{ active: this.active === 'tentes' }"
+        >Tentes</a
+      >
+    </li>
+    <li class="navitem">
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Sacs de couchage' }"
+        [ngClass]="{ active: this.active === 'sacsDeCouchage' }"
+        >Sacs de couchage</a
+      >
+    </li>
+    <li class="navitem">
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Accessoires' }"
+        [ngClass]="{ active: this.active === 'accessoires' }"
+        >Accessoires</a
+      >
+    </li>
+  </ul>
+  <button class="login">Login</button>
+  <app-hamburger-menu></app-hamburger-menu>
+</nav>

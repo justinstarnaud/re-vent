@@ -1,0 +1,75 @@
+:root {
+  --color-background: #ffffff;
+  --color-main-background: #fafafa;
+  --color-text: #282828;
+  --color-accent: #1ba4307d;
+  --color-accent-solid: #1ba42f;
+  --shadow-default: 0px 0px 20px 5px #a5a5a51a;
+}
+
+h1,
+h2,
+h3,
+span,
+p {
+  color: var(--color-text);
+}
+
+/* You can add global styles to this file, and also import other style files */
+html {
+  background-color: var(--color-main-background);
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  // min-height: 100vh;
+  // display: flex;
+  // flex-direction: column;
+  margin: 0;
+}
+
+button {
+  background-color: var(--color-text);
+  color: var(--color-background);
+  border: none;
+  padding: 10px 25px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+button.inverted {
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+.main-content {
+  // flex-grow: 1;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
+  margin: auto;
+  width: 90%;
+}
+
+app-nav-bar {
+  z-index: 99;
+  position: relative;
+  position: sticky;
+  background-color: var(--color-main-background);
+  left: 0;
+  right: 0;
+  top: 0px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .main-content {
+    width: 100%;
+  }
+}

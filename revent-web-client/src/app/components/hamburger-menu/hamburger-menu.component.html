@@ -1,0 +1,30 @@
+<div class="menu-container" [ngClass]="{ open: this.opened }">
+  <ul class="navlist">
+    <li class="navitem">
+      <a routerLink="/products" [queryParams]="{ category: 'Vêtements' }"
+        >Vêtements</a
+      >
+    </li>
+    <li class="navitem">
+      <a routerLink="/products" [queryParams]="{ category: 'Tentes' }"
+        >Tentes</a
+      >
+    </li>
+    <li class="navitem">
+      <a routerLink="/products" [queryParams]="{ category: 'Sacs de couchage' }"
+        >Sacs de couchage</a
+      >
+    </li>
+    <li class="navitem">
+      <a routerLink="/products" [queryParams]="{ category: 'Accessoires' }"
+        >Accessoires</a
+      >
+    </li>
+  </ul>
+</div>
+<div id="burger" (click)="toggleOpen()" [ngClass]="{ open: this.opened }">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>

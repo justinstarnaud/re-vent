@@ -1,0 +1,45 @@
+<div
+  class="item-container"
+  [style.width.px]="size"
+  routerLink="/product"
+  [queryParams]="{ id: item.handle }"
+>
+  <img
+    *ngIf="item.image"
+    class="item-image"
+    [style.width.px]="size"
+    [style.height.px]="size"
+    [src]="item.image"
+    alt=""
+  />
+  <app-skeleton
+    class="nomargin"
+    *ngIf="!item.image"
+    type="image"
+    [height]="size + 'px'"
+    [width]="size + 'px'"
+  ></app-skeleton>
+
+  <app-skeleton *ngIf="!item.title" type="title" height="20px"></app-skeleton>
+
+  <app-skeleton
+    *ngIf="!item.price"
+    type="title"
+    height="15px"
+    width="50px"
+  ></app-skeleton>
+  <app-skeleton
+    *ngIf="!item.city"
+    type="title"
+    height="10px"
+    width="75px"
+  ></app-skeleton>
+  <div *ngIf="item.title" class="item-infos">
+    <div class="main-infos">
+      <span class="name">{{ item.title }}</span>
+    </div>
+
+    <span *ngIf="item.price" class="price">{{ item.price }} $</span>
+    <p *ngIf="item.city" class="city">{{ item.city }}, {{ item.province }}</p>
+  </div>
+</div>

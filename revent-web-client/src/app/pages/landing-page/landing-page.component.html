@@ -1,0 +1,69 @@
+<div class="background"></div>
+<app-nav-bar class="navbar"></app-nav-bar>
+<div class="main-content">
+  <div class="img-container">
+    <img class="main-img" src="/assets/images/camping-background.jpg" alt="" />
+    <h1>
+      UN ÉCHANGE DURABLE <br />
+      D'ÉQUIPEMENT PLEIN AIR
+    </h1>
+    <app-search-bar></app-search-bar>
+  </div>
+  <h2 class="en-avant">Mis en avant</h2>
+  <div class="items-showcase">
+    <app-item-preview
+      *ngFor="let item of items"
+      [item]="item"
+    ></app-item-preview>
+  </div>
+  <h2 class="trouvez">Trouvez de l'équipement</h2>
+  <div class="options">
+    <a href="" class="option">
+      <img src="/assets/images/camping-background.jpg" alt="" />
+      <span>SACS À DOS</span>
+    </a>
+    <a href="" class="option">
+      <img src="/assets/images/camping-background.jpg" alt="" />
+      <span>SACS DE COUCHAGE</span>
+    </a>
+    <a href="" class="option">
+      <img src="/assets/images/camping-background.jpg" alt="" />
+      <span>TENTES</span>
+    </a>
+    <a href="" class="option">
+      <img src="/assets/images/camping-background.jpg" alt="" />
+      <span>VETEMENTS</span>
+    </a>
+    <a href="" class="option">
+      <img src="/assets/images/camping-background.jpg" alt="" />
+      <span>ÉQUIPEMENT DE CUISINE</span>
+    </a>
+    <a href="" class="option">
+      <img src="/assets/images/camping-background.jpg" alt="" />
+      <span>VOIR TOUT</span>
+    </a>
+  </div>
+</div>
+
+<h2 class="trouvez">Vendre de l'équipement</h2>
+<div class="sell">
+  <img src="/assets/images/camping-sell.png" alt="" class="sell-img" />
+  <div class="sell-info">
+    <h4>Donnez une seconde vie a votre équipement</h4>
+    <p>Vous avez de l'équipement que vous n'utilisez plus ?</p>
+    <button class="inverted">Vendre</button>
+  </div>
+</div>
+<div class="sell-mobile">
+  <h4>
+    Donnez une seconde vie <br />
+    a votre équipement
+  </h4>
+  <p>
+    Vous avez de l'équipement que <br />
+    vous n'utilisez plus ?
+  </p>
+  <button>Vendre</button>
+</div>
+
+<app-footer></app-footer>

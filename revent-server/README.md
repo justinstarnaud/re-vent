@@ -1,0 +1,2 @@
+# revent-server
+npm start

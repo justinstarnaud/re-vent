@@ -1,0 +1,40 @@
+<div class="search-container">
+  <div class="search-text">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M14.1923 16.3103C12.356 17.616 10.0962 18.1841 7.8608 17.902C5.62539 17.6199 3.57752 16.5083 2.12304 14.7874C0.668566 13.0664 -0.086365 10.8618 0.00786875 8.61051C0.102103 6.35916 1.03862 4.22538 2.63183 2.63204C4.22503 1.03871 6.35863 0.102111 8.60979 0.00786941C10.8609 -0.0863722 13.0654 0.668621 14.7861 2.12322C16.5069 3.57782 17.6185 5.62586 17.9005 7.86145C18.1826 10.097 17.6145 12.357 16.3089 14.1935L23.5233 21.4065C23.6705 21.5436 23.7885 21.709 23.8704 21.8927C23.9522 22.0764 23.9962 22.2748 23.9998 22.4759C24.0033 22.677 23.9663 22.8767 23.891 23.0632C23.8157 23.2497 23.7036 23.4191 23.5614 23.5613C23.4192 23.7035 23.2498 23.8157 23.0633 23.891C22.8768 23.9663 22.6771 24.0033 22.476 23.9998C22.2749 23.9962 22.0766 23.9522 21.8929 23.8703C21.7092 23.7885 21.5438 23.6705 21.4067 23.5233L14.1923 16.3103ZM14.9771 8.98541C14.9771 7.39652 14.3459 5.87272 13.2225 4.74921C12.0991 3.6257 10.5754 2.99452 8.98666 2.99452C7.39791 2.99452 5.87423 3.6257 4.75081 4.74921C3.62739 5.87272 2.99626 7.39652 2.99626 8.98541C2.99626 10.5743 3.62739 12.0981 4.75081 13.2216C5.87423 14.3451 7.39791 14.9763 8.98666 14.9763C10.5754 14.9763 12.0991 14.3451 13.2225 13.2216C14.3459 12.0981 14.9771 10.5743 14.9771 8.98541Z"
+        fill="black"
+      />
+    </svg>
+    <!-- <p>Recherchez vous quelque chose en particulier ?</p> -->
+    <input
+      #input
+      tabindex="1"
+      (blur)="resetSearch()"
+      (input)="updateSearch()"
+      type="text"
+      placeholder="Recherchez vous quelque chose ?"
+    />
+  </div>
+  <div (mousedown)="preventClose($event)" #result class="search-result hidden">
+    <div
+      class="search-product"
+      *ngFor="let product of this.displayedProducts"
+      routerLink="/product"
+      [queryParams]="{ id: product.handle }"
+    >
+      <img [src]="product.image" alt="" class="search-img" />
+      <p class="title">{{ product.title }}</p>
+      <p class="price">{{ product.price }} $</p>
+    </div>
+    <p *ngIf="this.displayedProducts.length == 0" class="rien">
+      Aucun article ne correspond à votre recherche...
+    </p>
+  </div>
+</div>
