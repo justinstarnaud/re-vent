@@ -40,7 +40,8 @@
     "instrument": true
   },
   "_moduleAliases": {
-    "@app": "out/"
+    "@app": "out/revent-server/app",
+    "@common": "out/common"
   },
   "dependencies": {
     "@shopify/shopify-api": "^7.5.0",

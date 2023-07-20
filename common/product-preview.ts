@@ -1,7 +1,7 @@
 export interface ProductPreview {
     id: number;
     title: string;
-    image: string;
+    image: any;
     price: string;
     address: string; // meta
     city: string; // meta
