@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CommunicationService } from './communication.service';
 import { ALL_PRODUCTS_QUERY, PRODUCT_BY_HANDLE_QUERY } from '../constants';
-import { Product } from '../interfaces/product';
-import { ProductPreview } from '../interfaces/product-preview';
+import { Product } from '../../../../common/product';
+import { ProductPreview } from '../../../../common/product-preview';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class ProductService {
     );
     result.products.edges.forEach((edge: any) => {
       const product: ProductPreview = {
-        handle: edge.node.handle,
+        id: edge.node.handle,
         image: edge.node.images.edges[0].node.url,
         title: edge.node.title,
         price: edge.node.priceRange.maxVariantPrice.amount,
@@ -38,7 +38,7 @@ export class ProductService {
     );
     console.log(result);
     const productPreview: ProductPreview = {
-      handle: result.productByHandle.handle,
+      id: result.productByHandle.handle,
       image: result.productByHandle.images.edges[0].node.url,
       title: result.productByHandle.title,
       price: result.productByHandle.priceRange.maxVariantPrice.amount,
@@ -55,6 +55,7 @@ export class ProductService {
       }),
       condition: 'Comme neuf',
       sellerID: result.productByHandle.vendor,
+      filters: {},
     };
     return product;
   }

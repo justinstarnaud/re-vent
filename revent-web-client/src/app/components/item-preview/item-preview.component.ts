@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DEFAULT_ITEM_PREVIEW } from 'src/app/constants';
-import { ProductPreview } from 'src/app/interfaces/product-preview';
+import { ProductPreview } from '../../../../../common/product-preview';
 
 @Component({
   selector: 'app-item-preview',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DEFAULT_ITEM, DEFAULT_SELLER } from 'src/app/constants';
-import { Product } from 'src/app/interfaces/product';
+import { Product } from '../../../../../common/product';
 import { seller } from 'src/app/interfaces/seller';
 import { ProductService } from 'src/app/services/product.service';
 

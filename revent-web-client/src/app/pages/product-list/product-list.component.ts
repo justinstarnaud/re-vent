@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filters } from 'src/app/interfaces/filters';
-import { ProductPreview } from 'src/app/interfaces/product-preview';
 import { ProductService } from 'src/app/services/product.service';
-import { items } from 'src/TEMP MOCK FILES/item-previews';
+import { items, itemsFilter } from 'src/TEMP MOCK FILES/item-previews';
+import { Product } from '../../../../../common/product';
 
 @Component({
   selector: 'app-product-list',
@@ -12,13 +12,13 @@ import { items } from 'src/TEMP MOCK FILES/item-previews';
 })
 export class ProductListComponent implements OnInit {
   category: string;
-  products: ProductPreview[];
+  products: Product[];
   sortOpen: boolean;
   currentSort: string;
   showFiltersMobile: boolean;
   sortName: string;
   constructor(
-    private route: ActivatedRoute,
+    // private route: ActivatedRoute,
     private productService: ProductService
   ) {
     this.category = '';
@@ -26,12 +26,12 @@ export class ProductListComponent implements OnInit {
     this.sortOpen = false;
     this.sortName = 'En vedette';
     this.showFiltersMobile = false;
-    this.products = items;
-    this.route.queryParams.subscribe(async (params) => {
-      this.category = params['category'];
-      // TODO: Get only category ?
-      this.products = await this.productService.getAll();
-    });
+    this.products = itemsFilter;
+    // this.route.queryParams.subscribe(async (params) => {
+    //   this.category = params['category'];
+    //   // TODO: Get only category ?
+    //   this.products = await this.productService.getAll();
+    // });
   }
   ngOnInit(): void {}
 
@@ -49,7 +49,7 @@ export class ProductListComponent implements OnInit {
       this.currentSort = newSort;
       switch (this.currentSort) {
         case 'vedette':
-          this.products = await this.productService.getAll();
+          // this.products = await this.productService.getAll();
           this.sortName = 'En vedette';
           break;
         case 'recents':
@@ -58,16 +58,16 @@ export class ProductListComponent implements OnInit {
 
           break;
         case 'prixcroissant':
-          this.products.sort((p1: ProductPreview, p2: ProductPreview) => {
-            return parseInt(p1.price) - parseInt(p2.price);
+          this.products.sort((p1: Product, p2: Product) => {
+            return parseInt(p1.preview.price) - parseInt(p2.preview.price);
           });
           this.products = JSON.parse(JSON.stringify(this.products));
           this.sortName = 'Prix croissant';
 
           break;
         case 'prixdescroissant':
-          this.products.sort((p1: ProductPreview, p2: ProductPreview) => {
-            return parseInt(p2.price) - parseInt(p1.price);
+          this.products.sort((p1: Product, p2: Product) => {
+            return parseInt(p2.preview.price) - parseInt(p1.preview.price);
           });
           this.products = JSON.parse(JSON.stringify(this.products));
           this.sortName = 'Prix décroissant';
@@ -78,12 +78,12 @@ export class ProductListComponent implements OnInit {
     this.sortOpen = false;
   }
 
-  async updateFilters(filtersUpdate: filters) {
-    this.products = await this.productService.getAll();
-    this.products = this.products.filter((product: ProductPreview) => {
+  async updateFilters(filtersUpdate: Map<string, any[]>) {
+    // this.products = await this.productService.getAll();
+    this.products = this.products.filter((product: Product) => {
       return (
-        parseInt(product.price) >= filtersUpdate.price[0] &&
-        parseInt(product.price) <= filtersUpdate.price[1]
+        parseInt(product.preview.price) >= filtersUpdate.get('price')![0] &&
+        parseInt(product.preview.price) <= filtersUpdate.get('price')![1]
       );
     });
   }

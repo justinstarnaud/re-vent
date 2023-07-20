@@ -27,7 +27,7 @@
       class="search-product"
       *ngFor="let product of this.displayedProducts"
       routerLink="/product"
-      [queryParams]="{ id: product.handle }"
+      [queryParams]="{ id: product.id }"
     >
       <img [src]="product.image" alt="" class="search-img" />
       <p class="title">{{ product.title }}</p>

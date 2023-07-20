@@ -89,13 +89,13 @@
         class="normal-preview"
         [size]="200"
         *ngFor="let item of products"
-        [item]="item"
+        [item]="item.preview"
       ></app-item-preview>
       <app-item-preview
         class="small-preview"
         [size]="150"
         *ngFor="let item of products"
-        [item]="item"
+        [item]="item.preview"
       ></app-item-preview>
       <div class="empty" *ngIf="products.length == 0">
         <svg

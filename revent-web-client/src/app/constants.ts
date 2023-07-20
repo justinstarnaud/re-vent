@@ -1,9 +1,9 @@
-import { Product } from './interfaces/product';
-import { ProductPreview } from './interfaces/product-preview';
+import { ProductPreview } from '../../../common/product-preview';
+import { Product } from '../../../common/product';
 import { seller } from './interfaces/seller';
 
 export const DEFAULT_ITEM_PREVIEW: ProductPreview = {
-  handle: '',
+  id: 0,
   title: '',
   price: '',
   address: '',
@@ -19,6 +19,7 @@ export const DEFAULT_ITEM: Product = {
   sellerID: '',
   condition: '',
   otherImages: [],
+  filters: {},
 };
 
 export const DEFAULT_SELLER: seller = {

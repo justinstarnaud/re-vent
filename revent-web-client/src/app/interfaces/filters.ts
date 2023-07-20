@@ -1,5 +1,5 @@
 export interface filters {
-  size?: string;
-  condition?: string;
+  size?: string[];
+  condition?: string[];
   price: number[];
 }

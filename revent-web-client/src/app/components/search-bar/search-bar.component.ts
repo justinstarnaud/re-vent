@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ProductPreview } from 'src/app/interfaces/product-preview';
 import { ProductService } from 'src/app/services/product.service';
+import { ProductPreview } from '../../../../../common/product-preview';
 
 @Component({
   selector: 'app-search-bar',
