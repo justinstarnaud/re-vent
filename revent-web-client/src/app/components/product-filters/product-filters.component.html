@@ -29,4 +29,21 @@
       />
     </div>
   </div>
+  <div *ngFor="let element of this.keys">
+    <div *ngIf="element !== 'price'">
+      <hr />
+      <h3>{{ element }}</h3>
+
+      <form>
+        <div
+          *ngFor="let option of this.productFilters.get(element)"
+          class="form-group"
+          (click)="toggleFilter(element, option, $event)"
+        >
+          <input type="checkbox" [id]="option" />
+          <label [for]="option">{{ option }}</label>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
