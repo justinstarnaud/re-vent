@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { filters } from 'src/app/interfaces/filters';
 import { ProductService } from 'src/app/services/product.service';
 import { items, itemsFilter } from 'src/TEMP MOCK FILES/item-previews';
+import { ClothingFilter } from '../../../../../common/filters';
 import { Product } from '../../../../../common/product';
 
 @Component({
@@ -13,6 +14,8 @@ import { Product } from '../../../../../common/product';
 export class ProductListComponent implements OnInit {
   category: string;
   products: Product[];
+  filteredProducts: Product[];
+
   sortOpen: boolean;
   currentSort: string;
   showFiltersMobile: boolean;
@@ -32,6 +35,8 @@ export class ProductListComponent implements OnInit {
     //   // TODO: Get only category ?
     //   this.products = await this.productService.getAll();
     // });
+
+    this.filteredProducts = JSON.parse(JSON.stringify(this.products));
   }
   ngOnInit(): void {}
 
@@ -79,14 +84,35 @@ export class ProductListComponent implements OnInit {
   }
 
   async updateFilters(filtersUpdate: Map<string, any[]>) {
-    // this.products = await this.productService.getAll();
-    this.products = this.products.filter((product: Product) => {
-      return (
-        parseInt(product.preview.price) >= filtersUpdate.get('price')![0] &&
-        parseInt(product.preview.price) <= filtersUpdate.get('price')![1]
+    this.filteredProducts = this.products;
+
+    filtersUpdate.delete('price');
+    for (const [filterName, filterValues] of filtersUpdate) {
+      this.filteredProducts = this.filteredProducts.filter(
+        (product: Product) => {
+          if (!product.filters) return false;
+          return filterValues.includes(
+            product.filters[filterName as keyof ClothingFilter]
+          );
+        }
       );
-    });
+    }
   }
+
+  // async updateFilters(filtersUpdate: Map<string, any[]>) {
+
+  //   this.filteredProducts = this.products.filter((product: Product) => {
+
+  //   })
+
+  //   // this.products = await this.productService.getAll();
+  //   // this.products = this.products.filter((product: Product) => {
+  //   //   return (
+  //   //     parseInt(product.preview.price) >= filtersUpdate.get('price')![0] &&
+  //   //     parseInt(product.preview.price) <= filtersUpdate.get('price')![1]
+  //   //   );
+  //   // });
+  // }
 
   showFilters() {
     this.showFiltersMobile = true;

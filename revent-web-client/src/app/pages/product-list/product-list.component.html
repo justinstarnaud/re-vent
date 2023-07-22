@@ -72,14 +72,14 @@
       <app-product-filters
         (updateFilters)="updateFilters($event)"
         [category]="category"
-        [currentProducts]="products"
+        [currentProducts]="filteredProducts"
       ></app-product-filters>
     </div>
   </div>
 
   <div class="product-container">
     <app-product-filters
-      [currentProducts]="products"
+      [currentProducts]="filteredProducts"
       (updateFilters)="updateFilters($event)"
       class="left-filters"
       [category]="category"
@@ -88,16 +88,16 @@
       <app-item-preview
         class="normal-preview"
         [size]="200"
-        *ngFor="let item of products"
+        *ngFor="let item of filteredProducts"
         [item]="item.preview"
       ></app-item-preview>
       <app-item-preview
         class="small-preview"
         [size]="150"
-        *ngFor="let item of products"
+        *ngFor="let item of filteredProducts"
         [item]="item.preview"
       ></app-item-preview>
-      <div class="empty" *ngIf="products.length == 0">
+      <div class="empty" *ngIf="filteredProducts.length == 0">
         <svg
           width="352"
           height="352"
@@ -130,7 +130,7 @@
   </div>
   <button
     class="return"
-    [ngClass]="{ hidden: products.length < 30 }"
+    [ngClass]="{ hidden: filteredProducts.length < 30 }"
     (click)="scrollToTop()"
   >
     Retourner en haut

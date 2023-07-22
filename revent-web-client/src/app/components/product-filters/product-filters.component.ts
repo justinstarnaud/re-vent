@@ -13,6 +13,7 @@ import {
 import { filters } from 'src/app/interfaces/filters';
 import { Product } from '../../../../../common/product';
 import { ClothingFilter } from '../../../../../common/filters';
+import * as e from 'express';
 
 @Component({
   selector: 'app-product-filters',
@@ -46,7 +47,7 @@ export class ProductFiltersComponent implements OnInit, OnChanges {
   }
 
   update() {
-    this.updateFilters.emit(this.productFilters);
+    this.updateFilters.emit(this.selectedFilters);
   }
 
   // slider
@@ -93,7 +94,7 @@ export class ProductFiltersComponent implements OnInit, OnChanges {
         }
         this.min = Math.min(this.min, parseInt(product.preview.price));
         this.max = Math.max(this.max, parseInt(product.preview.price));
-        this.productFilters.set('price', [this.min, this.max]);
+        this.selectedFilters.set('price', [this.min, this.max]);
       }
     });
   }
@@ -134,16 +135,14 @@ export class ProductFiltersComponent implements OnInit, OnChanges {
     let percent1 = (parseInt(sliderOne.value) / parseInt(sliderMaxValue)) * 100;
     let percent2 = (parseInt(sliderTwo.value) / parseInt(sliderMaxValue)) * 100;
     sliderTrack!.style.background = `linear-gradient(to right, #e0eae1 ${percent1}% , var(--color-accent-solid) ${percent1}% , var(--color-accent-solid) ${percent2}%, #e0eae1 ${percent2}%)`;
-    this.productFilters.set('price', [
+    this.selectedFilters.set('price', [
       parseInt(sliderOne.value),
       parseInt(sliderTwo.value),
     ]);
   }
 
   toggleFilter(category: string, option: string, event: Event) {
-    const checked = (
-      (event.currentTarget as HTMLElement)!.children[0] as HTMLInputElement
-    ).checked;
+    const checked = (event.currentTarget as HTMLInputElement).checked;
     let currentFilter = this.selectedFilters.get(category);
     if (currentFilter) {
       if (checked) {
@@ -162,6 +161,6 @@ export class ProductFiltersComponent implements OnInit, OnChanges {
       this.selectedFilters.set(category, [option]);
     }
 
-    console.log(this.selectedFilters);
+    this.update();
   }
 }
