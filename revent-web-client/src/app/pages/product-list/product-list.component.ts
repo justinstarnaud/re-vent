@@ -84,7 +84,12 @@ export class ProductListComponent implements OnInit {
   }
 
   async updateFilters(filtersUpdate: Map<string, any[]>) {
-    this.filteredProducts = this.products;
+    this.filteredProducts = this.products.filter((product: Product) => {
+      return (
+        parseInt(product.preview.price) >= filtersUpdate.get('price')![0] &&
+        parseInt(product.preview.price) <= filtersUpdate.get('price')![1]
+      );
+    });
 
     filtersUpdate.delete('price');
     for (const [filterName, filterValues] of filtersUpdate) {
@@ -98,21 +103,6 @@ export class ProductListComponent implements OnInit {
       );
     }
   }
-
-  // async updateFilters(filtersUpdate: Map<string, any[]>) {
-
-  //   this.filteredProducts = this.products.filter((product: Product) => {
-
-  //   })
-
-  //   // this.products = await this.productService.getAll();
-  //   // this.products = this.products.filter((product: Product) => {
-  //   //   return (
-  //   //     parseInt(product.preview.price) >= filtersUpdate.get('price')![0] &&
-  //   //     parseInt(product.preview.price) <= filtersUpdate.get('price')![1]
-  //   //   );
-  //   // });
-  // }
 
   showFilters() {
     this.showFiltersMobile = true;
