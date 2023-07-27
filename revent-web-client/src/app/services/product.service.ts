@@ -3,6 +3,7 @@ import { CommunicationService } from './communication.service';
 import { ALL_PRODUCTS_QUERY, PRODUCT_BY_HANDLE_QUERY } from '../constants';
 import { Product } from '../../../../common/product';
 import { ProductPreview } from '../../../../common/product-preview';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,22 +13,25 @@ export class ProductService {
 
   async getAll() {
     const products: ProductPreview[] = [];
-    const result = await this.communicationService.queryToShopify(
-      ALL_PRODUCTS_QUERY
-    );
-    result.products.edges.forEach((edge: any) => {
-      const product: ProductPreview = {
-        id: edge.node.handle,
-        image: edge.node.images.edges[0].node.url,
-        title: edge.node.title,
-        price: edge.node.priceRange.maxVariantPrice.amount,
-        address: '3800 Normanville',
-        city: 'Montréal',
-        province: 'QC',
-        category: 'Vêtements',
-      };
-      products.push(product);
+    await fetch(environment.SERVER_URL + 'api/' + 'products', {
+      method: 'GET',
+    }).then(async (res) => {
+      const data = await res.json();
+      data.forEach((p: any) => {
+        const product: ProductPreview = {
+          id: p.id,
+          image: p.image ? p.image.src : '',
+          title: p.title,
+          price: p.variants[0].price,
+          address: '3800 Normanville',
+          city: 'Montréal',
+          province: 'QC',
+          category: 'Vêtements',
+        };
+        products.push(product);
+      });
     });
+
     return products;
   }
 

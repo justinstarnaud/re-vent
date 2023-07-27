@@ -8,8 +8,8 @@ export const environment = {
   SHOPIFY_API_SECRECT_KEY: 'd114a263a42c6c3bb548ff223b6a6751',
   SHOPIFY_API_KEY: 'a688a611f2d4b138d5f1fcf918549116',
   SHOPIFY_HOST_NAME: 'quickstart-dce88969.myshopify.com',
-  SHOPIFY_STOREFRONT_TOKEN: '526e7f9218f3bb64b11a6290e796df73'
-
+  SHOPIFY_STOREFRONT_TOKEN: '526e7f9218f3bb64b11a6290e796df73',
+  SERVER_URL: 'http://localhost:3000/',
 };
 
 /*

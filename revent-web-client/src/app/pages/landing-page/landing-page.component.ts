@@ -12,7 +12,6 @@ import { ProductPreview } from '../../../../../common/product-preview';
 export class LandingPageComponent implements OnInit {
   items: ProductPreview[];
   constructor(private productService: ProductService) {
-    // TODO: remplacer avec les vrais items
     this.items = items;
   }
 
