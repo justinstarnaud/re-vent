@@ -12,13 +12,13 @@ export class ProductService {
   constructor(private communicationService: CommunicationService) {}
 
   async getAll() {
-    const products: ProductPreview[] = [];
+    const products: Product[] = [];
     await fetch(environment.SERVER_URL + 'api/' + 'products', {
       method: 'GET',
     }).then(async (res) => {
       const data = await res.json();
       data.forEach((p: any) => {
-        const product: ProductPreview = {
+        const productPreview: ProductPreview = {
           id: p.id,
           image: p.image ? p.image.src : '',
           title: p.title,
@@ -28,6 +28,17 @@ export class ProductService {
           province: 'QC',
           category: 'Vêtements',
         };
+        const product: Product = {
+          preview: productPreview,
+          description: 'DEFAULT DESC',
+          otherImages: p.images.map((img: any) => {
+            return img.src;
+          }),
+          condition: 'Comme neuf',
+          sellerID: p.vendor,
+          filters: {},
+        };
+
         products.push(product);
       });
     });

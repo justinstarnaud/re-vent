@@ -97,7 +97,7 @@
         *ngFor="let item of filteredProducts"
         [item]="item.preview"
       ></app-item-preview>
-      <div class="empty" *ngIf="filteredProducts.length == 0">
+      <div class="empty" *ngIf="filteredProducts.length == 0 && received">
         <svg
           width="352"
           height="352"

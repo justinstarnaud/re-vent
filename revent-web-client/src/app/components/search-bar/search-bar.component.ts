@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
+import { Product } from '../../../../../common/product';
 import { ProductPreview } from '../../../../../common/product-preview';
 
 @Component({
@@ -10,8 +11,8 @@ import { ProductPreview } from '../../../../../common/product-preview';
 export class SearchBarComponent implements OnInit {
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
   @ViewChild('result') result!: ElementRef<HTMLElement>;
-  products: ProductPreview[];
-  displayedProducts: ProductPreview[];
+  products: Product[];
+  displayedProducts: Product[];
 
   constructor(private productService: ProductService) {
     this.products = [];
@@ -35,11 +36,11 @@ export class SearchBarComponent implements OnInit {
       this.displayedProducts = [];
     } else {
       this.result.nativeElement.classList.remove('hidden');
-      this.displayedProducts = this.products.filter(
-        (product: ProductPreview) => {
-          return product.title.toLowerCase().includes(field.toLowerCase());
-        }
-      );
+      this.displayedProducts = this.products.filter((product: Product) => {
+        return product.preview.title
+          .toLowerCase()
+          .includes(field.toLowerCase());
+      });
     }
   }
 

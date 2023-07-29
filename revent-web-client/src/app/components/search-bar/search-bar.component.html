@@ -27,11 +27,11 @@
       class="search-product"
       *ngFor="let product of this.displayedProducts"
       routerLink="/product"
-      [queryParams]="{ id: product.id }"
+      [queryParams]="{ id: product.preview.id }"
     >
-      <img [src]="product.image" alt="" class="search-img" />
-      <p class="title">{{ product.title }}</p>
-      <p class="price">{{ product.price }} $</p>
+      <img [src]="product.preview.image" alt="" class="search-img" />
+      <p class="title">{{ product.preview.title }}</p>
+      <p class="price">{{ product.preview.price }} $</p>
     </div>
     <p *ngIf="this.displayedProducts.length == 0" class="rien">
       Aucun article ne correspond à votre recherche...

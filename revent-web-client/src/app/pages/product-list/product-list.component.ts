@@ -20,23 +20,27 @@ export class ProductListComponent implements OnInit {
   currentSort: string;
   showFiltersMobile: boolean;
   sortName: string;
+  received: boolean;
   constructor(
-    // private route: ActivatedRoute,
+    private route: ActivatedRoute,
     private productService: ProductService
   ) {
     this.category = '';
+    this.received = false;
     this.currentSort = 'vedette';
     this.sortOpen = false;
     this.sortName = 'En vedette';
     this.showFiltersMobile = false;
-    this.products = itemsFilter;
-    // this.route.queryParams.subscribe(async (params) => {
-    //   this.category = params['category'];
-    //   // TODO: Get only category ?
-    //   this.products = await this.productService.getAll();
-    // });
+    this.products = [];
+    this.route.queryParams.subscribe(async (params) => {
+      this.category = params['category'];
+      // TODO: Get only category ?
 
-    this.filteredProducts = JSON.parse(JSON.stringify(this.products));
+      this.products = await this.productService.getAll();
+      this.filteredProducts = JSON.parse(JSON.stringify(this.products));
+      this.received = true;
+    });
+    this.filteredProducts = [];
   }
   ngOnInit(): void {}
 

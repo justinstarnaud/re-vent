@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DEFAULT_ITEM_PREVIEW } from 'src/app/constants';
 import { ProductService } from 'src/app/services/product.service';
 import { items } from 'src/TEMP MOCK FILES/item-previews';
+import { Product } from '../../../../../common/product';
 import { ProductPreview } from '../../../../../common/product-preview';
 
 @Component({
@@ -10,9 +11,9 @@ import { ProductPreview } from '../../../../../common/product-preview';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  items: ProductPreview[];
+  items: Product[];
   constructor(private productService: ProductService) {
-    this.items = items;
+    this.items = [];
   }
 
   async ngOnInit(): Promise<void> {
