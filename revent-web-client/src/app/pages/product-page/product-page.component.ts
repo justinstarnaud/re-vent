@@ -11,7 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-page.component.scss'],
 })
 export class ProductPageComponent implements OnInit {
-  id: string;
+  id: number;
   item: Product;
   selectedImg: string;
   seller: seller;
@@ -19,12 +19,13 @@ export class ProductPageComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService
   ) {
-    this.id = '';
+    this.id = 0;
     this.seller = DEFAULT_SELLER;
     this.item = DEFAULT_ITEM;
     this.route.queryParams.subscribe(async (params) => {
       this.id = params['id'];
-      this.item = await this.productService.get(this.id);
+      const item = await this.productService.get(this.id);
+      this.item = item ?? DEFAULT_ITEM;
       this.item.otherImages.shift();
       this.selectedImg = this.item.preview.image;
     });

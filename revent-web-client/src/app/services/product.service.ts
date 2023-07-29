@@ -35,33 +35,38 @@ export class ProductService {
     return products;
   }
 
-  async get(handle: string) {
-    const result = await this.communicationService.queryToShopify(
-      PRODUCT_BY_HANDLE_QUERY,
-      { handle: handle }
-    );
-    console.log(result);
-    const productPreview: ProductPreview = {
-      id: result.productByHandle.handle,
-      image: result.productByHandle.images.edges[0].node.url,
-      title: result.productByHandle.title,
-      price: result.productByHandle.priceRange.maxVariantPrice.amount,
-      address: '3800 Normanville',
-      city: 'Montréal',
-      province: 'QC',
-      category: 'Vêtements',
-    };
-    const product: Product = {
-      preview: productPreview,
-      description: result.productByHandle.description,
-      otherImages: result.productByHandle.images.edges.map((edge: any) => {
-        return edge.node.url;
-      }),
-      condition: 'Comme neuf',
-      sellerID: result.productByHandle.vendor,
-      filters: {},
-    };
-    return product;
+  async get(id: number): Promise<Product | undefined> {
+    let productFromId;
+    await fetch(environment.SERVER_URL + 'api/' + 'product/' + id, {
+      method: 'GET',
+    }).then(async (res) => {
+      const result = await res.json();
+
+      const productPreview: ProductPreview = {
+        id: result.id,
+        image: result.image ? result.image.src : '',
+        title: result.title,
+        price: result.variants[0].price,
+        address: '3800 Normanville',
+        city: 'Montréal',
+        province: 'QC',
+        category: 'Vêtements',
+      };
+      const product: Product = {
+        preview: productPreview,
+        description: 'DEFAULT DESC',
+        otherImages: result.images.map((img: any) => {
+          return img.src;
+        }),
+        condition: 'Comme neuf',
+        sellerID: result.vendor,
+        filters: {},
+      };
+
+      productFromId = product;
+    });
+
+    return productFromId;
   }
 
   // exemple de handle
